@@ -1,0 +1,30 @@
+
+class Solution
+{
+public:
+    Node *nextRight(Node *root, int key)
+    {
+        //code here
+        queue<pair<Node *,int>> q;
+        q.push({root,0});
+        while(!q.empty()){
+            auto node = q.front().first;
+            int depth = q.front().second;
+            q.pop();
+            if(node->data==key){
+                if(!q.empty() && q.front().second==depth){
+                    return q.front().first;
+                }
+                else
+                    return new Node(-1);
+            }
+            if(node->left)
+                q.push({node->left,depth+1});
+            if(node->right)
+                q.push({node->right,depth+1});
+                
+        }
+        return new Node(-1);
+    }
+};
+
